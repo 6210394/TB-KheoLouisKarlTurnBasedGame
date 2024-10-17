@@ -23,8 +23,9 @@ public class PlayerScript : TurnBasedEntity
         Init();
     }
 
-    void Init()
+    public override void Init()
     {
+        base.Init();
         playerMovement = GetComponent<PlayerMovement>();
     }
 
