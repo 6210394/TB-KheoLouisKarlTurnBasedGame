@@ -35,6 +35,25 @@ public class PlayerScript : TurnBasedEntity
         {
             EndTurn();
         }
+        if(Input.GetMouseButtonDown(0) && hasTurn && !hasAttacked)
+        {
+            Vector3 target = PerformRaycast();
+            Attack(target);
+        }
+
+    }
+
+    public Vector3 PerformRaycast()
+    {
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+
+        if(Physics.Raycast(ray, out hit))
+        {
+            Debug.Log("Hit Point " + hit.point);
+            return hit.point;
+        }
+        return new Vector3(0, 0, 0);
     }
 
     override public void StartTurn()

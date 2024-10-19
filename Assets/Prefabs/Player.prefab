@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7136113027110368160}
   - component: {fileID: 5941139413458086877}
   - component: {fileID: 834584160825312638}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Visor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -61,7 +61,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 2f6ce1f0ca2dfbd4a9aca38edb7433b3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -95,13 +95,14 @@ GameObject:
   - component: {fileID: 2074576685318885468}
   - component: {fileID: 710333996383566679}
   - component: {fileID: 6472454957406901163}
+  - component: {fileID: 8576003368422496304}
   - component: {fileID: 1518536750779507991}
   - component: {fileID: 6282627407853324305}
   - component: {fileID: 4017932637318489472}
   - component: {fileID: 5636198124719517186}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -150,7 +151,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 2f6ce1f0ca2dfbd4a9aca38edb7433b3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -199,6 +200,20 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 84
   m_CollisionDetection: 0
+--- !u!114 &8576003368422496304
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3429089372807879662}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aeff685b7eaf5254aac8cbb1e958ac75, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletPrefab: {fileID: 2396886314696227177, guid: 74f52a7cb9e8d2745a58594f93a38b5a, type: 3}
+  spawnOriginOffset: {x: 0, y: 0, z: 0.65}
 --- !u!114 &1518536750779507991
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -211,7 +226,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34715cc6e3d095d4caa07cee2633ea5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maximumMovementDistance: 10
+  hasTurn: 1
+  initiative: 2
+  health: 0
+  attackDamage: 1
+  maximumMovementDistance: 20
   hasAttacked: 1
 --- !u!114 &6282627407853324305
 MonoBehaviour:

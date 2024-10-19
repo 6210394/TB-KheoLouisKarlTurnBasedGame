@@ -33,4 +33,14 @@ public class GameManager : MonoBehaviour
     {
         camera.LookAt = target;
     }
+    
+    #region Score Management
+
+        [SerializeField]
+        public int score;
+        public void AddScore(int scoreAdded)
+        {
+            score += scoreAdded;
+        }
+    #endregion
 }
