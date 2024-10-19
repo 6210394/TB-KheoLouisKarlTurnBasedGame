@@ -31,16 +31,24 @@ public class PlayerScript : TurnBasedEntity
 
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Space))
+        if(Input.GetKeyDown(KeyCode.Space ) && hasTurn)
         {
-            StartTurn();
+            EndTurn();
         }
     }
 
     override public void StartTurn()
     {
+        Debug.Log("Player Turn");
         base.StartTurn();
         playerMovement.movementRemaining = maximumMovementDistance;
+    }
+
+    protected override void EndTurn()
+    {
+        playerMovement.movementRemaining = 0;
+        hasAttacked = true;
+        base.EndTurn();
     }
 
 }

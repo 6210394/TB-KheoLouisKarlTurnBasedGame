@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class TurnBasedEntity : MonoBehaviour
 {
+    public bool hasTurn = false;
+
     public int initiative = 0;
     int maxHealth = 1;
     public int health = 0;
@@ -16,9 +18,14 @@ public class TurnBasedEntity : MonoBehaviour
 
     public virtual void StartTurn()
     {
+        hasTurn = true;
         hasAttacked = false;
     }
-
+    protected virtual void EndTurn()
+    {
+        hasTurn = false;
+        TurnManager.instance.CallStartNextEntityTurn();
+    }
     public virtual void Init()
     {
         health = maxHealth;
@@ -38,4 +45,5 @@ public class TurnBasedEntity : MonoBehaviour
         Destroy(gameObject);
     }
 
+    
 }
