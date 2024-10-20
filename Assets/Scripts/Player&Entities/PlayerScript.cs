@@ -17,6 +17,11 @@ public class PlayerScript : TurnBasedEntity
     }
 
     PlayerMovement playerMovement;
+    ShootingScript shootingScript;
+
+    public KeyCode endTurnKey;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -26,12 +31,13 @@ public class PlayerScript : TurnBasedEntity
     public override void Init()
     {
         base.Init();
+        shootingScript = GetComponent<ShootingScript>();
         playerMovement = GetComponent<PlayerMovement>();
     }
 
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Space ) && hasTurn)
+        if(Input.GetKeyDown(endTurnKey) && hasTurn)
         {
             EndTurn();
         }
@@ -68,6 +74,12 @@ public class PlayerScript : TurnBasedEntity
         playerMovement.movementRemaining = 0;
         hasAttacked = true;
         base.EndTurn();
+    }
+
+    public override void Attack(Vector3 target)
+    {
+        shootingScript.Shoot(target, attackDamage, gameObject.tag);
+        base.Attack(target);
     }
 
 }

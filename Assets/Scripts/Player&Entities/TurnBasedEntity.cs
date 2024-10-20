@@ -10,14 +10,9 @@ public class TurnBasedEntity : MonoBehaviour
     public int initiative = 0;
     int maxHealth = 1;
     public int health = 0;
-
     public int attackDamage = 1;
-
     public float maximumMovementDistance = 10f;
     public bool hasAttacked = true;
-
-
-    ShootingScript shootingScript;
 
     public virtual void StartTurn()
     {
@@ -32,7 +27,6 @@ public class TurnBasedEntity : MonoBehaviour
     public virtual void Init()
     {
         health = maxHealth;
-        shootingScript = GetComponent<ShootingScript>();
     }
 
     public virtual void TakeDamage(int damage)
@@ -47,11 +41,11 @@ public class TurnBasedEntity : MonoBehaviour
     public virtual void Die()
     {
         TurnManager.instance.RemoveEntityFromEntityList(gameObject);
+        TurnManager.instance.CallStartNextEntityTurn();
     }
 
     public virtual void Attack(Vector3 target)
     {
-        shootingScript.Shoot(target, attackDamage, gameObject.tag);
         hasAttacked = true;
     }
 }

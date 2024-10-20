@@ -227,6 +227,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hasTurn: 1
+  endTurnKey: 32
   initiative: 2
   health: 0
   attackDamage: 1
