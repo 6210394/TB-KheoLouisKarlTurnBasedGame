@@ -14,6 +14,8 @@ GameObject:
   - component: {fileID: 4566553618178093331}
   - component: {fileID: 8764551737909760543}
   - component: {fileID: 3291985458631675910}
+  - component: {fileID: 1182006426451334170}
+  - component: {fileID: 484103479022425915}
   - component: {fileID: 5963879086199659275}
   m_Layer: 3
   m_Name: Enemy
@@ -149,15 +151,51 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32b18010fc09577499511c42a8dfe8b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hasTurn: 0
-  endTurnKey: 101
+  hasTurn: 1
   initiative: 0
   health: 0
   attackDamage: 1
-  maximumMovementDistance: 10
+  maximumMovementDistance: 5
   hasAttacked: 1
   enemyStats: {fileID: 11400000, guid: be73700bed357244abc4def41b884367, type: 2}
-  currentState: 1
+  automaticMovementScript: {fileID: 0}
+--- !u!114 &1182006426451334170
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3421014867595147161}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ccfab632d46eb44ebd54ae3e385256f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {x: 0, y: 0, z: 0}
+  targetObject: {fileID: 0}
+  speed: 3
+  movementRemaining: 0
+  navMeshAgent: {fileID: 0}
+  destroyable: 0
+  lifeTime: 1
+--- !u!114 &484103479022425915
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3421014867595147161}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: befd8df37c2dbea4c989e4ce800edbbc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentState: 0
+  enemyEntityScript: {fileID: 3291985458631675910}
+  target: {fileID: 0}
+  attackRange: 2
+  detectionRange: 20
+  automaticMovementScript: {fileID: 0}
 --- !u!195 &5963879086199659275
 NavMeshAgent:
   m_ObjectHideFlags: 0

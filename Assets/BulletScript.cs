@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class BulletScript : MonoBehaviour
 {
+    AutomaticMovementScript automaticMovementScript;
     public string tagToIgnore;
     public int bulletDamage; 
     void OnTriggerEnter(Collider other)
@@ -14,5 +15,15 @@ public class BulletScript : MonoBehaviour
             Debug.Log("Bullet hit " + other.name);
             other.GetComponent<TurnBasedEntity>().TakeDamage(bulletDamage);
         }
+    }
+
+    void Start()
+    {
+        automaticMovementScript = GetComponent<AutomaticMovementScript>();
+    }
+
+    void Update()
+    {
+        automaticMovementScript.MoveToTarget();
     }
 }

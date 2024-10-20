@@ -15,5 +15,5 @@ MonoBehaviour:
   initiative: 1
   maxHealth: 3
   attackDamage: 1
-  maximumMovementDistance: 5
-  speed: 0
+  maximumMovementDistance: 10
+  speed: 3

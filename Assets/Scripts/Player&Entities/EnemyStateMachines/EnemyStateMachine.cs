@@ -9,7 +9,7 @@ public class EnemyStateMachine : MonoBehaviour
     public enum EVENT { ENTER, UPDATE, EXIT }
     
     public STATE currentState;
-    protected EVENT currentEvent;
+    public EVENT currentEvent;
     protected STATE nextState;
 
     public EnemyStateMachine()
@@ -23,7 +23,10 @@ public class EnemyStateMachine : MonoBehaviour
 
     public virtual void Update()
     {
-        RunStateMachine();
+        if(enemyEntityScript.hasTurn)
+        {
+            RunStateMachine();
+        }
     }
 
     public virtual void Init()

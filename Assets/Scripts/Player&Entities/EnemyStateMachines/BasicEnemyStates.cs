@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class BasicShooterStates : EnemyStateMachine
+public class BasicEnemyStates : EnemyStateMachine
 {
     public float attackRange = 2;
+    public float detectionRange = 20;
+
+    public AutomaticMovementScript automaticMovementScript;
 
     void Start()
     {
@@ -16,6 +19,10 @@ public class BasicShooterStates : EnemyStateMachine
     {
         base.Init();
         target = PlayerScript.instance.gameObject;
+        automaticMovementScript = GetComponent<AutomaticMovementScript>();
+
+        attackRange = enemyEntityScript.enemyStats.attackRange;
+        detectionRange = enemyEntityScript.enemyStats.detectionRange;
     }
 
     public override void Searching()
@@ -31,7 +38,7 @@ public class BasicShooterStates : EnemyStateMachine
 
             case EVENT.UPDATE:
             {
-                if(Vector3.Distance(transform.position, target.transform.position) < 10)
+                if(Vector3.Distance(transform.position, target.transform.position) <= detectionRange)
                 {
                     SwitchToNextEvent(EVENT.EXIT);
                 }
@@ -41,6 +48,7 @@ public class BasicShooterStates : EnemyStateMachine
             case EVENT.EXIT:
             {
                 SwitchToNextState(STATE.CHASING);
+                SwitchToNextEvent(EVENT.ENTER);
                 break;
             }
         }
@@ -63,16 +71,30 @@ public class BasicShooterStates : EnemyStateMachine
                 {
                     SwitchToNextEvent(EVENT.EXIT);
                 }
-                else if(enemyEntityScript.movementRemaining > 0)
+                if (automaticMovementScript.movementRemaining > 0)
                 {
-                    transform.position = Vector3.MoveTowards(transform.position, target.transform.position, enemyEntityScript.movementSpeed * Time.deltaTime);
+                    automaticMovementScript.MoveWithNavMesh(target.transform.position);
                 }
+                else
+                {
+                    SwitchToNextEvent(EVENT.EXIT);
+                }
+            
                 break;
             }
 
             case EVENT.EXIT:
             {
-                SwitchToNextState(STATE.ATTACKING);
+                if(Vector3.Distance(transform.position, target.transform.position) < attackRange)
+                {
+                    SwitchToNextState(STATE.ATTACKING);
+                    SwitchToNextEvent(EVENT.ENTER);
+                }
+                else
+                {
+                    SwitchToNextState(STATE.SEARCHING);
+                    SwitchToNextEvent(EVENT.ENTER);
+                }
                 break;
             }    
         }
@@ -84,17 +106,34 @@ public class BasicShooterStates : EnemyStateMachine
         switch(currentEvent)
         {
             case EVENT.ENTER:
-                Debug.Log("Attacking Enter");
+                currentEvent = EVENT.UPDATE;
                 break;
 
             case EVENT.UPDATE:
-                Debug.Log("Attacking Update");
+            {
+                Debug.Log("Attacking");
+                enemyEntityScript.Attack(target.transform.position);
+                currentEvent = EVENT.EXIT;
                 break;
+            }
 
             case EVENT.EXIT:
-                Debug.Log("Attacking Exit");
+            {
+                SwitchToNextEvent(EVENT.ENTER);
+                SwitchToNextState(STATE.SEARCHING);
+                enemyEntityScript.EndTurn();
                 break;
+            }
+                
         }
+    }
+
+    void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, detectionRange);
+        Gizmos.color = Color.blue;
+        Gizmos.DrawWireSphere(transform.position, attackRange);
     }
     
 }

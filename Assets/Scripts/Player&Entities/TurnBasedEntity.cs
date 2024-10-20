@@ -19,7 +19,7 @@ public class TurnBasedEntity : MonoBehaviour
         hasTurn = true;
         hasAttacked = false;
     }
-    protected virtual void EndTurn()
+    public virtual void EndTurn()
     {
         hasTurn = false;
         TurnManager.instance.CallStartNextEntityTurn();

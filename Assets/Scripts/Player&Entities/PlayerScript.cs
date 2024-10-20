@@ -69,7 +69,7 @@ public class PlayerScript : TurnBasedEntity
         playerMovement.movementRemaining = maximumMovementDistance;
     }
 
-    protected override void EndTurn()
+    public override void EndTurn()
     {
         playerMovement.movementRemaining = 0;
         hasAttacked = true;

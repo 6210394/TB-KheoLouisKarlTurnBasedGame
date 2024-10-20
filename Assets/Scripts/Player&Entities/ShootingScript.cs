@@ -14,7 +14,7 @@ public class ShootingScript : MonoBehaviour
     public void Shoot(Vector3 target, int damageToPassOnToBullet, string tagToIgnore)
     {
         GameObject bullet = Instantiate(bulletPrefab, transform.position + transform.rotation * spawnOriginOffset, transform.rotation);
-        bullet.GetComponent<MoveToScript>().target = target;
+        bullet.GetComponent<AutomaticMovementScript>().target = target;
         bullet.GetComponent<BulletScript>().bulletDamage = damageToPassOnToBullet;
         bullet.GetComponent<BulletScript>().tagToIgnore = tagToIgnore;
     }
