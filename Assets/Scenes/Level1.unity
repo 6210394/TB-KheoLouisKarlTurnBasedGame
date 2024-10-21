@@ -674,15 +674,43 @@ PrefabInstance:
     - target: {fileID: 484103479022425915, guid: a2cf85de14f065a48b47556dd7c0aab5, type: 3}
       propertyPath: target
       value: 
-      objectReference: {fileID: 3388957573215034650}
+      objectReference: {fileID: 0}
+    - target: {fileID: 484103479022425915, guid: a2cf85de14f065a48b47556dd7c0aab5, type: 3}
+      propertyPath: attackRange
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 484103479022425915, guid: a2cf85de14f065a48b47556dd7c0aab5, type: 3}
+      propertyPath: detectionRange
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 484103479022425915, guid: a2cf85de14f065a48b47556dd7c0aab5, type: 3}
+      propertyPath: enemyEntityScript
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 1182006426451334170, guid: a2cf85de14f065a48b47556dd7c0aab5, type: 3}
       propertyPath: speed
       value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 1182006426451334170, guid: a2cf85de14f065a48b47556dd7c0aab5, type: 3}
+      propertyPath: lifeTime
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1182006426451334170, guid: a2cf85de14f065a48b47556dd7c0aab5, type: 3}
+      propertyPath: target.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1182006426451334170, guid: a2cf85de14f065a48b47556dd7c0aab5, type: 3}
+      propertyPath: target.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1182006426451334170, guid: a2cf85de14f065a48b47556dd7c0aab5, type: 3}
       propertyPath: targetObject
       value: 
-      objectReference: {fileID: 3388957573215034650}
+      objectReference: {fileID: 0}
+    - target: {fileID: 1182006426451334170, guid: a2cf85de14f065a48b47556dd7c0aab5, type: 3}
+      propertyPath: hasReachedTarget
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1857437863319320424, guid: a2cf85de14f065a48b47556dd7c0aab5, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -724,8 +752,16 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3291985458631675910, guid: a2cf85de14f065a48b47556dd7c0aab5, type: 3}
+      propertyPath: hasTurn
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3291985458631675910, guid: a2cf85de14f065a48b47556dd7c0aab5, type: 3}
+      propertyPath: attackDamage
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3291985458631675910, guid: a2cf85de14f065a48b47556dd7c0aab5, type: 3}
       propertyPath: maximumMovementDistance
-      value: 10
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3421014867595147161, guid: a2cf85de14f065a48b47556dd7c0aab5, type: 3}
       propertyPath: m_Name
@@ -788,16 +824,15 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6282627407853324305, guid: bf37a2f02fd41a743a0d1696f6f4353c, type: 3}
+      propertyPath: movementRemaining
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bf37a2f02fd41a743a0d1696f6f4353c, type: 3}
---- !u!1 &3388957573215034650 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3429089372807879662, guid: bf37a2f02fd41a743a0d1696f6f4353c, type: 3}
-  m_PrefabInstance: {fileID: 3388957573215034649}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

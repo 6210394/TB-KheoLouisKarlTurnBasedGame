@@ -43,10 +43,14 @@ public class BasicEnemyStates : EnemyStateMachine
                     SwitchToNextEvent(EVENT.EXIT);
                 }
                 else
-                {
-                    
+                {   
+                    Debug.Log("Moving Randomly");
+                    automaticMovementScript.MoveRandomly();
+                    if(automaticMovementScript.movementRemaining <= 0)
+                    {
+                        SwitchToNextEvent(EVENT.EXIT);
+                    }
                 }
-            
                 break;
             }
             case EVENT.EXIT:

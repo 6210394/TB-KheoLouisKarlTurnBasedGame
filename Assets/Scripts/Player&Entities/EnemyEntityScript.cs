@@ -17,6 +17,14 @@ public class EnemyEntityScript : TurnBasedEntity
         Init();
     }
 
+    void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.E))
+        {
+            EndTurn();
+        }
+    }
+
     public override void Die()
     {
         base.Die();
@@ -35,6 +43,8 @@ public class EnemyEntityScript : TurnBasedEntity
         Debug.Log("Enemy Turn");
         base.StartTurn();
         automaticMovementScript.movementRemaining = maximumMovementDistance;
+        automaticMovementScript.hasReachedTarget = true;
+        automaticMovementScript.navMeshAgent.isStopped = false;
         // Do enemy AI stuff here
     }
 
@@ -44,6 +54,7 @@ public class EnemyEntityScript : TurnBasedEntity
         attackDamage = enemyStats.attackDamage;
         maximumMovementDistance = enemyStats.maximumMovementDistance;
         automaticMovementScript.movementRemaining = maximumMovementDistance;
+        automaticMovementScript.speed = enemyStats.speed;
         initiative = enemyStats.initiative;
     }
 
