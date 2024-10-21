@@ -42,6 +42,10 @@ public class BasicEnemyStates : EnemyStateMachine
                 {
                     SwitchToNextEvent(EVENT.EXIT);
                 }
+                else
+                {
+                    
+                }
             
                 break;
             }
@@ -92,6 +96,7 @@ public class BasicEnemyStates : EnemyStateMachine
                 }
                 else
                 {
+                    enemyEntityScript.EndTurn();
                     SwitchToNextState(STATE.SEARCHING);
                     SwitchToNextEvent(EVENT.ENTER);
                 }
