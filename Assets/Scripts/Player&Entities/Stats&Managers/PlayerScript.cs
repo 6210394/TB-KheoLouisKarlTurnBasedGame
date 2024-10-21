@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class PlayerScript : TurnBasedEntity
 {    
@@ -20,6 +22,7 @@ public class PlayerScript : TurnBasedEntity
     ShootingScript shootingScript;
 
     public KeyCode endTurnKey;
+    public GameObject endTurnButton;
 
 
     // Start is called before the first frame update
@@ -33,6 +36,7 @@ public class PlayerScript : TurnBasedEntity
         base.Init();
         shootingScript = GetComponent<ShootingScript>();
         playerMovement = GetComponent<PlayerMovement>();
+        EndTurnButtonDisplay(false);
     }
 
     void Update()
@@ -46,7 +50,6 @@ public class PlayerScript : TurnBasedEntity
             Vector3 target = PerformRaycast();
             Attack(target);
         }
-
     }
 
     public Vector3 PerformRaycast()
@@ -65,6 +68,8 @@ public class PlayerScript : TurnBasedEntity
     override public void StartTurn()
     {
         Debug.Log("Player Turn");
+        EndTurnButtonDisplay(false);
+
         base.StartTurn();
         playerMovement.movementRemaining = maximumMovementDistance;
     }
@@ -74,12 +79,42 @@ public class PlayerScript : TurnBasedEntity
         playerMovement.movementRemaining = 0;
         hasAttacked = true;
         base.EndTurn();
+        EndTurnButtonDisplay(false);
     }
 
     public override void Attack(Vector3 target)
     {
         shootingScript.Shoot(target, attackDamage, gameObject.tag);
         base.Attack(target);
+        if(playerMovement.movementRemaining <= 0)
+        {
+            EndTurnButtonDisplay(true);
+            Debug.Log("Out of movement");
+            return;
+        }
+    }
+
+    public void EndTurnButtonDisplay(bool display)
+    {
+        if(endTurnButton == null)
+        {
+            endTurnButton = GameObject.Find("EndTurnButton");
+        }
+
+        switch(display)
+        {
+            case true:
+                endTurnButton.GetComponent<Button>().enabled = true;
+                endTurnButton.GetComponent<Image>().enabled = true;
+                endTurnButton.GetComponentInChildren<TextMeshProUGUI>().enabled = true;
+                break;
+            
+            case false:
+                endTurnButton.GetComponent<Button>().enabled = false;
+                endTurnButton.GetComponent<Image>().enabled = false;
+                endTurnButton.GetComponentInChildren<TextMeshProUGUI>().enabled = false;
+                break;
+        }
     }
 
 }

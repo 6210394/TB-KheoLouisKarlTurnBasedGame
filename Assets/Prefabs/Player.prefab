@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 834584160825312638}
   m_Layer: 3
   m_Name: Visor
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -227,12 +227,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hasTurn: 1
-  endTurnKey: 32
   initiative: 2
   health: 0
   attackDamage: 1
   maximumMovementDistance: 20
   hasAttacked: 1
+  endTurnKey: 32
+  endTurnButton: {fileID: 0}
 --- !u!114 &6282627407853324305
 MonoBehaviour:
   m_ObjectHideFlags: 0

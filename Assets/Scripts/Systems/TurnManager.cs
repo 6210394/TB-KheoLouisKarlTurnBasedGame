@@ -1,7 +1,6 @@
-using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
+using TMPro;
 
 public class TurnManager : MonoBehaviour
 {
@@ -18,11 +17,19 @@ public class TurnManager : MonoBehaviour
     List<GameObject> gameEntities = new List<GameObject>();
 
     int nextEntityTurnIndex = 0;
+    public TextMeshProUGUI turnNum;
+    public TextMeshProUGUI currentEntity;
+
+    public int turnCount = 1;
 
     void Start()
     {
         Init();
         SortListByInitiative();
+        turnNum = GameObject.Find("TurnNum").GetComponent<TextMeshProUGUI>();
+        currentEntity = GameObject.Find("CurrentEntity").GetComponent<TextMeshProUGUI>();
+        turnNum.text = turnCount.ToString();
+
     }
 
     void Init()
@@ -41,6 +48,10 @@ public class TurnManager : MonoBehaviour
     public void RemoveEntityFromEntityList(GameObject entity)
     {
         gameEntities.Remove(entity);
+        if(gameEntities.Count == 1)
+        {
+            CallStartNextEntityTurn();
+        }
     }
 
     public void CallStartNextEntityTurn()
@@ -48,10 +59,13 @@ public class TurnManager : MonoBehaviour
         if (nextEntityTurnIndex >= gameEntities.Count)
         {
             nextEntityTurnIndex = 0;
+            turnCount += 1;
+            turnNum.text = turnCount.ToString();
         }
         gameEntities[nextEntityTurnIndex].GetComponent<TurnBasedEntity>().StartTurn();
+        currentEntity.text = gameEntities[nextEntityTurnIndex].name + " is moving...";
         nextEntityTurnIndex += 1;
-
+        
     }
 
     public void SortListByInitiative()

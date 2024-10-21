@@ -41,7 +41,7 @@ public class TurnBasedEntity : MonoBehaviour
     public virtual void Die()
     {
         TurnManager.instance.RemoveEntityFromEntityList(gameObject);
-        TurnManager.instance.CallStartNextEntityTurn();
+        GameManager.instance.AddScore(100);
     }
 
     public virtual void Attack(Vector3 target)

@@ -161,7 +161,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {x: 0, y: 0, z: 0}
+  targetObject: {fileID: 0}
   speed: 30
+  movementRemaining: 0
+  navMeshAgent: {fileID: 0}
+  hasReachedTarget: 1
   destroyable: 1
   lifeTime: 1
 --- !u!135 &-6108716098297283349
@@ -183,7 +187,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 2.44
+  m_Radius: 0.48
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &3915951709698064655
 MonoBehaviour:
@@ -197,3 +201,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71e82a358646e174b90d0cf0dd3055e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tagToIgnore: 
+  bulletDamage: 0

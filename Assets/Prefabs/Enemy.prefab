@@ -151,11 +151,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32b18010fc09577499511c42a8dfe8b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hasTurn: 1
+  hasTurn: 0
   initiative: 0
   health: 0
-  attackDamage: 1
-  maximumMovementDistance: 5
+  attackDamage: 0
+  maximumMovementDistance: 0
   hasAttacked: 1
   enemyStats: {fileID: 11400000, guid: be73700bed357244abc4def41b884367, type: 2}
   automaticMovementScript: {fileID: 0}
@@ -173,11 +173,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {x: 0, y: 0, z: 0}
   targetObject: {fileID: 0}
-  speed: 3
+  speed: 6
   movementRemaining: 0
   navMeshAgent: {fileID: 0}
+  hasReachedTarget: 1
   destroyable: 0
-  lifeTime: 1
+  lifeTime: 0
 --- !u!114 &484103479022425915
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -191,10 +192,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentState: 0
-  enemyEntityScript: {fileID: 3291985458631675910}
+  currentEvent: 0
+  enemyEntityScript: {fileID: 0}
   target: {fileID: 0}
-  attackRange: 2
-  detectionRange: 20
+  attackRange: 0
+  detectionRange: 0
   automaticMovementScript: {fileID: 0}
 --- !u!195 &5963879086199659275
 NavMeshAgent:

@@ -10,6 +10,7 @@ public class BulletScript : MonoBehaviour
     public int bulletDamage; 
     void OnTriggerEnter(Collider other)
     {
+        Debug.Log("Bullet hit " + other.name);
         if (other.GetComponent<TurnBasedEntity>() && other.tag != tagToIgnore)
         {
             Debug.Log("Bullet hit " + other.name);

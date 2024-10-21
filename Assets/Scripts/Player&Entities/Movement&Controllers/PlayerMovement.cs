@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     public float movementRemaining = 0f;
+    TMPro.TextMeshProUGUI movementRemainingText;
 
     CharacterController characterController;
     Camera playerCamera;
@@ -35,6 +36,7 @@ public class PlayerMovement : MonoBehaviour
         {
             playerCamera = Camera.main;
             characterController = GetComponent<CharacterController>();
+            movementRemainingText = GameObject.Find("MovementRemaining").GetComponent<TMPro.TextMeshProUGUI>();
         }
         public void Move()
         {
@@ -82,6 +84,16 @@ public class PlayerMovement : MonoBehaviour
             PlayerCharacterRotation(movement, moveSpeed * speedModifier);
             characterController.Move(movement * moveSpeed * speedModifier *  Time.deltaTime);
             movementRemaining -= movement.magnitude * moveSpeed * speedModifier * Time.deltaTime;
+
+            movementRemainingText.color = Color.green;
+            movementRemainingText.text = movementRemaining.ToString("F1");
+
+            if (movementRemaining <= 0)
+            {
+                movementRemaining = 0;
+                PlayerScript.instance.EndTurnButtonDisplay(true);
+                movementRemainingText.color = Color.red;
+            }
         }
         void PlayerCharacterRotation(Vector3 direction, float currentSpeed)
         {
