@@ -21,23 +21,23 @@ public class TurnManager : MonoBehaviour
     public TextMeshProUGUI currentEntity;
 
     public int turnCount = 1;
+    public int totalTurnCount;
 
     void Start()
     {
         Init();
-        SortListByInitiative();
-        turnNum = GameObject.Find("TurnNum").GetComponent<TextMeshProUGUI>();
-        currentEntity = GameObject.Find("CurrentEntity").GetComponent<TextMeshProUGUI>();
-        turnNum.text = turnCount.ToString();
-
     }
 
-    void Init()
+    public void Init()
     {
         foreach (TurnBasedEntity entity in FindObjectsOfType<TurnBasedEntity>())
         {
             AddEntityToEntityList(entity.gameObject);
         }
+        SortListByInitiative();
+        turnNum = GameObject.Find("TurnNum").GetComponent<TextMeshProUGUI>();
+        currentEntity = GameObject.Find("CurrentEntity").GetComponent<TextMeshProUGUI>();
+        turnNum.text = turnCount.ToString();
     }
     
     public void AddEntityToEntityList(GameObject entity)

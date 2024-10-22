@@ -1,11 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
 using Cinemachine;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
+    public string sceneToLoad;
     
     void Awake()
     {
@@ -43,4 +43,18 @@ public class GameManager : MonoBehaviour
             score += scoreAdded;
         }
     #endregion
+
+    public void ManagerLoadScene(string sceneName)
+    {
+        TurnManager.instance.totalTurnCount += TurnManager.instance.turnCount;
+        TurnManager.instance.turnCount = 1;
+        SceneManager.LoadScene(sceneToLoad);
+        TurnManager.instance.Init();
+        TurnManager.instance.SortListByInitiative();
+    }
+
+    public void GameOver()
+    {
+        ManagerLoadScene("GameOver");
+    }
 }

@@ -1,10 +1,13 @@
 using UnityEngine;
+using System.Collections;
 using UnityEngine.AI;
 
 public class EnemyEntityScript : TurnBasedEntity
 {
     public EnemyStats enemyStats;
     public AutomaticMovementScript automaticMovementScript;
+
+    public Animator animator;
 
     public EnemyEntityScript(EnemyStats enemyStats)
     {
@@ -34,6 +37,7 @@ public class EnemyEntityScript : TurnBasedEntity
     public override void Init()
     {
         automaticMovementScript = GetComponent<AutomaticMovementScript>();
+        animator = GetComponentInChildren<Animator>();
         AquireStats();
         base.Init();
     }
@@ -56,6 +60,23 @@ public class EnemyEntityScript : TurnBasedEntity
         automaticMovementScript.movementRemaining = maximumMovementDistance;
         automaticMovementScript.speed = enemyStats.speed;
         initiative = enemyStats.initiative;
+    }
+
+    public override void Attack(GameObject potentialTarget)
+    {
+        base.Attack(potentialTarget);
+        
+        if(potentialTarget != null)
+        {
+            animator.SetTrigger("AttackTrigger");
+            StartCoroutine(DealDamageAfterDelay(potentialTarget, animator.GetCurrentAnimatorStateInfo(0).length));
+        }
+    }
+
+    private IEnumerator DealDamageAfterDelay(GameObject target, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        target.GetComponent<TurnBasedEntity>().TakeDamage(attackDamage);
     }
 
     /*

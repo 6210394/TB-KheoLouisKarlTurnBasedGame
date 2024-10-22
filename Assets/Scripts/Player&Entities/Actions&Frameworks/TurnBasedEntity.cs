@@ -44,7 +44,7 @@ public class TurnBasedEntity : MonoBehaviour
         GameManager.instance.AddScore(100);
     }
 
-    public virtual void Attack(Vector3 target)
+    public virtual void Attack(GameObject potentialTarget)
     {
         hasAttacked = true;
     }

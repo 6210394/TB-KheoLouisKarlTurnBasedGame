@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.UIElements;
 
 public class BasicEnemyStates : EnemyStateMachine
@@ -115,13 +116,14 @@ public class BasicEnemyStates : EnemyStateMachine
         switch(currentEvent)
         {
             case EVENT.ENTER:
+                automaticMovementScript.navMeshAgent.isStopped = true;
                 currentEvent = EVENT.UPDATE;
                 break;
 
             case EVENT.UPDATE:
             {
                 Debug.Log("Attacking");
-                enemyEntityScript.Attack(target.transform.position);
+                enemyEntityScript.Attack(target);
                 currentEvent = EVENT.EXIT;
                 break;
             }

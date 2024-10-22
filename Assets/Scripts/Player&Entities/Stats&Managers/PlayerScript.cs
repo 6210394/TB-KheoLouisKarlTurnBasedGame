@@ -7,6 +7,8 @@ using TMPro;
 
 public class PlayerScript : TurnBasedEntity
 {    
+    public int lives = 3;
+    Vector3 spawnPoint;
     public static PlayerScript instance;
 
     void Awake()
@@ -36,6 +38,7 @@ public class PlayerScript : TurnBasedEntity
         base.Init();
         shootingScript = GetComponent<ShootingScript>();
         playerMovement = GetComponent<PlayerMovement>();
+        spawnPoint = transform.position;
         EndTurnButtonDisplay(false);
     }
 
@@ -47,8 +50,23 @@ public class PlayerScript : TurnBasedEntity
         }
         if(Input.GetMouseButtonDown(0) && hasTurn && !hasAttacked)
         {
-            Vector3 target = PerformRaycast();
-            Attack(target);
+            Attack(null);
+        }
+
+        //debug
+        if(Input.GetKeyDown(KeyCode.T))
+        {
+            TakeDamage(1);
+        }
+    }
+
+    public override void Die()
+    {
+        lives--;
+        transform.position = spawnPoint;
+        if(lives <= 0)
+        {
+            GameManager.instance.GameOver();
         }
     }
 
@@ -82,14 +100,14 @@ public class PlayerScript : TurnBasedEntity
         EndTurnButtonDisplay(false);
     }
 
-    public override void Attack(Vector3 target)
+    public override void Attack(GameObject potentialTarget)
     {
-        shootingScript.Shoot(target, attackDamage, gameObject.tag);
-        base.Attack(target);
+        base.Attack(potentialTarget);
+
+        shootingScript.Shoot(PerformRaycast(), attackDamage, gameObject.tag);
         if(playerMovement.movementRemaining <= 0)
         {
             EndTurnButtonDisplay(true);
-            Debug.Log("Out of movement");
             return;
         }
     }

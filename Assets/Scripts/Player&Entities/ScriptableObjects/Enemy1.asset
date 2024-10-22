@@ -15,7 +15,7 @@ MonoBehaviour:
   initiative: 1
   maxHealth: 3
   attackDamage: 1
-  attackRange: 5
+  attackRange: 4
   detectionRange: 15
   maximumMovementDistance: 20
   speed: 3
