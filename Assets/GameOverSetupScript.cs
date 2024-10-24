@@ -10,7 +10,7 @@ public class GameOverSetupScript : MonoBehaviour
     void Start()
     {
         scoreText.text = GameManager.instance.score.ToString();
-        turns.text = TurnManager.instance.turnCount.ToString();
+        turns.text = TurnManager.instance.totalTurnCount.ToString();
     }
 
 }

@@ -10,6 +10,7 @@ public class StartScript : MonoBehaviour
     void Start()
     {
         CreateGameManager();
+        SetCursorState(true, CursorLockMode.None);
     }
 
     public void LoadScene()
@@ -34,5 +35,11 @@ public class StartScript : MonoBehaviour
         {
             Instantiate(gameManagerObject);
         }
+    }
+
+    public void SetCursorState(bool visible, CursorLockMode lockMode)
+    {
+        Cursor.visible = visible;
+        Cursor.lockState = lockMode;
     }
 }
