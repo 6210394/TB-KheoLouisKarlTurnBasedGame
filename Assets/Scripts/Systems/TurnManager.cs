@@ -23,21 +23,23 @@ public class TurnManager : MonoBehaviour
     public int turnCount = 1;
     public int totalTurnCount;
 
-    void Start()
-    {
-        Init();
-    }
-
     public void Init()
     {
+        ClearEntityList();
+        totalTurnCount += turnCount;
+        turnCount = 0;
+
         foreach (TurnBasedEntity entity in FindObjectsOfType<TurnBasedEntity>())
         {
             AddEntityToEntityList(entity.gameObject);
         }
+
         SortListByInitiative();
         turnNum = GameObject.Find("TurnNum").GetComponent<TextMeshProUGUI>();
         currentEntity = GameObject.Find("CurrentEntity").GetComponent<TextMeshProUGUI>();
         turnNum.text = turnCount.ToString();
+
+        CallStartNextEntityTurn();
     }
     
     public void AddEntityToEntityList(GameObject entity)
@@ -52,6 +54,11 @@ public class TurnManager : MonoBehaviour
         {
             CallStartNextEntityTurn();
         }
+    }
+
+    public void ClearEntityList()
+    {
+        gameEntities.Clear();
     }
 
     public void CallStartNextEntityTurn()
@@ -70,6 +77,12 @@ public class TurnManager : MonoBehaviour
 
     public void SortListByInitiative()
     {
+        Debug.Log(gameEntities.Count);
+
+        if(gameEntities.Count <= 1)
+        {
+            return;
+        }
         gameEntities.Sort((x, y) => x.GetComponent<TurnBasedEntity>().initiative.CompareTo(y.GetComponent<TurnBasedEntity>().initiative));
         gameEntities.Reverse();
 

@@ -1,7 +1,5 @@
-using UnityEditor.Scripting;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.UIElements;
 
 public class AutomaticMovementScript : MonoBehaviour
 {
@@ -17,7 +15,7 @@ public class AutomaticMovementScript : MonoBehaviour
     public bool destroyable = false;
     public float lifeTime = 1f;
 
-    void Start()
+    void Awake()
     {
         Init();
     }

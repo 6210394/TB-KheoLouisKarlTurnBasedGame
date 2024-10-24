@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: 710333996383566679}
   - component: {fileID: 6472454957406901163}
   - component: {fileID: 8576003368422496304}
-  - component: {fileID: 1518536750779507991}
+  - component: {fileID: 6629045466716991225}
   - component: {fileID: 6282627407853324305}
   - component: {fileID: 4017932637318489472}
   - component: {fileID: 5636198124719517186}
@@ -214,7 +214,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 2396886314696227177, guid: 74f52a7cb9e8d2745a58594f93a38b5a, type: 3}
   spawnOriginOffset: {x: 0, y: 0, z: 0.65}
---- !u!114 &1518536750779507991
+--- !u!114 &6629045466716991225
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -226,7 +226,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34715cc6e3d095d4caa07cee2633ea5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hasTurn: 1
+  hasTurn: 0
   initiative: 2
   health: 0
   attackDamage: 1

@@ -24,10 +24,17 @@ public class CameraController : MonoBehaviour
 
     void Start ()
     {
-        target = GameObject.FindGameObjectWithTag("Player").transform;
+        GameManager.instance.onPlayerSpawned += GetNewPlayerReference;
+
+        GetNewPlayerReference();
         Vector3 angles = transform.eulerAngles;
         x = angles.y;
         y = angles.x;
+    }
+
+    public void GetNewPlayerReference()
+    {
+        target = GameManager.instance.playerReference.transform;
     }
 
     void Update ()
@@ -37,7 +44,6 @@ public class CameraController : MonoBehaviour
 
         GetMouseInput();
 
-        // Calculate the new position
         Quaternion rotation = Quaternion.Euler(y, x, 0);
         Vector3 negDistance = new Vector3(0.0f, 0.0f, -distance);
         Vector3 position = rotation * negDistance + target.position;
@@ -46,7 +52,6 @@ public class CameraController : MonoBehaviour
 
         CheckForWallInFrontOfCam(position, rotation);
         
-        //apply the rotation and position to the camera
         transform.rotation = rotation;
         transform.position = position;
     }

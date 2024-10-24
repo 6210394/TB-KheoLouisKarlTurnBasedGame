@@ -1,25 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
 public class PlayerScript : TurnBasedEntity
 {    
-    public int lives = 3;
-    Vector3 spawnPoint;
-    public static PlayerScript instance;
-
-    void Awake()
-    {
-        if(instance == null)
-        {
-            instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-    }
-
     PlayerMovement playerMovement;
     ShootingScript shootingScript;
 
@@ -28,9 +12,14 @@ public class PlayerScript : TurnBasedEntity
 
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         Init();
+    }
+
+    void Start()
+    {
+        EndTurnButtonDisplay(false);
     }
 
     public override void Init()
@@ -38,8 +27,6 @@ public class PlayerScript : TurnBasedEntity
         base.Init();
         shootingScript = GetComponent<ShootingScript>();
         playerMovement = GetComponent<PlayerMovement>();
-        spawnPoint = transform.position;
-        EndTurnButtonDisplay(false);
     }
 
     void Update()
@@ -62,12 +49,8 @@ public class PlayerScript : TurnBasedEntity
 
     public override void Die()
     {
-        lives--;
-        transform.position = spawnPoint;
-        if(lives <= 0)
-        {
-            GameManager.instance.GameOver();
-        }
+        GameManager.instance.LoseLife();
+        base.Die();
     }
 
     public Vector3 PerformRaycast()

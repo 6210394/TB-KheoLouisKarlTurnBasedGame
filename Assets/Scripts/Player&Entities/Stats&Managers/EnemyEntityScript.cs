@@ -1,6 +1,5 @@
 using UnityEngine;
 using System.Collections;
-using UnityEngine.AI;
 
 public class EnemyEntityScript : TurnBasedEntity
 {
@@ -15,7 +14,7 @@ public class EnemyEntityScript : TurnBasedEntity
     }
 
         // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         Init();
     }
@@ -30,8 +29,8 @@ public class EnemyEntityScript : TurnBasedEntity
 
     public override void Die()
     {
+        GameManager.instance.AddScore(100);
         base.Die();
-        Destroy(gameObject);
     }
 
     public override void Init()

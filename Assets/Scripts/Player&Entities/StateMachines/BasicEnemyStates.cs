@@ -1,8 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
-using UnityEngine.UIElements;
+
 
 public class BasicEnemyStates : EnemyStateMachine
 {
@@ -13,15 +10,29 @@ public class BasicEnemyStates : EnemyStateMachine
 
     void Start()
     {
+        target = GameManager.instance.playerReference;
+        GameManager.instance.onPlayerSpawned += GetNewPlayerReference;
+    }
+
+    void OnDestroy()
+    {
+        GameManager.instance.onPlayerSpawned -= GetNewPlayerReference;
+    }
+
+    void Awake()
+    {
         Init();
+    }
+
+    public void GetNewPlayerReference()
+    {
+        target = GameManager.instance.playerReference;
     }
 
     public override void Init()
     {
         base.Init();
-        target = PlayerScript.instance.gameObject;
         automaticMovementScript = GetComponent<AutomaticMovementScript>();
-
         attackRange = enemyEntityScript.enemyStats.attackRange;
         detectionRange = enemyEntityScript.enemyStats.detectionRange;
     }

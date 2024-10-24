@@ -4,8 +4,25 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    public delegate void OnPlayerSpawned();
+    public event OnPlayerSpawned onPlayerSpawned;
+
+
     public static GameManager instance;
     public string sceneToLoad;
+    public Transform playerSpawnPoint;
+
+    [HideInInspector]
+    public GameObject playerReference;
+    [HideInInspector]
+    public GameObject cameraReference;
+
+    [SerializeField]
+    GameObject playerPrefab;
+    [SerializeField]
+    GameObject playerCamera;
+
+    public int lives = 3;
     
     void Awake()
     {
@@ -14,20 +31,71 @@ public class GameManager : MonoBehaviour
             instance = this;
             DontDestroyOnLoad(gameObject);
         }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            LoseLife();
+        }
+
+        if (Input.GetKeyDown(KeyCode.G))
+        {
+            GameOver();
+        }
+
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            ManagerLoadScene(SceneManager.GetActiveScene().name);
+        }
+
+        if (Input.GetKeyDown(KeyCode.K))
+        {
+            KillAllEnemies();
+        }
     }
 
     void Start()
     {
         Init();
+        SceneManager.sceneLoaded += (scene, mode) => OnSceneLoaded(scene, mode);
     }
 
     void Init()
     {
+        SpawnPlayer();
+        
+        //this would be relevant in the case I had a camera for each enemy and it would swtich between them on their turn
         foreach (CinemachineVirtualCamera camera in FindObjectsOfType<CinemachineVirtualCamera>())
         {
-            ChangeCameraTarget(GameObject.Find("Player").transform, camera);
+            ChangeCameraTarget(playerReference.transform, camera);
         }
+
+        TurnManager.instance.Init();
     }
+
+    public void SpawnPlayer()
+    {
+        playerSpawnPoint = GameObject.Find("PlayerSpawnPoint").transform;
+        if(cameraReference == null)
+        {
+            CreatePlayerCamera();
+        }
+        playerReference = Instantiate(playerPrefab, playerSpawnPoint.position, playerSpawnPoint.rotation);
+        onPlayerSpawned?.Invoke();
+        return;
+    }
+
+    public void CreatePlayerCamera()
+    {
+        cameraReference = Instantiate(playerCamera, playerSpawnPoint.position, playerSpawnPoint.rotation);
+    }
+
 
     public void ChangeCameraTarget(Transform target, CinemachineVirtualCamera camera)
     {
@@ -46,15 +114,38 @@ public class GameManager : MonoBehaviour
 
     public void ManagerLoadScene(string sceneName)
     {
-        TurnManager.instance.totalTurnCount += TurnManager.instance.turnCount;
-        TurnManager.instance.turnCount = 1;
-        SceneManager.LoadScene(sceneToLoad);
-        TurnManager.instance.Init();
-        TurnManager.instance.SortListByInitiative();
+        SceneManager.LoadScene(sceneName);
+    }
+
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        Init();
+    }
+
+    public void LoseLife()
+    {
+        lives -= 1;
+
+        if (lives <= 0)
+        {
+            GameOver();
+        }
+        else
+        {
+            SpawnPlayer();
+        }
     }
 
     public void GameOver()
     {
         ManagerLoadScene("GameOver");
+    }
+
+    public void KillAllEnemies()
+    {
+        foreach (EnemyEntityScript enemy in FindObjectsOfType<EnemyEntityScript>())
+        {
+            enemy.Die();
+        }
     }
 }

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class EndTurnButton : MonoBehaviour
@@ -9,7 +7,12 @@ public class EndTurnButton : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        turnBasedEntity = GameObject.Find("Player").GetComponent<TurnBasedEntity>();
+        GameManager.instance.onPlayerSpawned += SetEntity;
+    }
+
+    public void SetEntity()
+    {
+        turnBasedEntity = GameManager.instance.playerReference.GetComponent<TurnBasedEntity>();
     }
 
     public void EndTurn()

@@ -1,10 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class StartScript : MonoBehaviour
 {
     public string sceneName = "GameSceneNameHere";
+
+    [SerializeField]
+    GameObject gameManagerObject;
 
     void Start()
     {
@@ -13,8 +14,8 @@ public class StartScript : MonoBehaviour
 
     public void LoadScene()
     {
-        UnityEngine.SceneManagement.SceneManager.LoadScene(sceneName);
-        if(sceneName == "Start")
+        GameManager.instance.ManagerLoadScene(sceneName);
+        if(sceneName == "Level1")
         {
             GameManager.instance.score = 0;
         }

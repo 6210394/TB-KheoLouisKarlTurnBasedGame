@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,6 +8,8 @@ public class PlayerMovement : MonoBehaviour
 
     CharacterController characterController;
     Camera playerCamera;
+
+    PlayerScript playerScript;
 
     public float moveSpeed = 5f;
     public float sprintSpeedModifier = 2f;
@@ -34,6 +35,7 @@ public class PlayerMovement : MonoBehaviour
     #region Functions
         void Init()
         {
+            playerScript = FindFirstObjectByType<PlayerScript>();
             playerCamera = Camera.main;
             characterController = GetComponent<CharacterController>();
             movementRemainingText = GameObject.Find("MovementRemaining").GetComponent<TMPro.TextMeshProUGUI>();
@@ -91,7 +93,7 @@ public class PlayerMovement : MonoBehaviour
             if (movementRemaining <= 0)
             {
                 movementRemaining = 0;
-                PlayerScript.instance.EndTurnButtonDisplay(true);
+                playerScript.EndTurnButtonDisplay(true);
                 movementRemainingText.color = Color.red;
             }
         }

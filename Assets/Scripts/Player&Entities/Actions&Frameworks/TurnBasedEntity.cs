@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Security;
 using UnityEngine;
 
 public class TurnBasedEntity : MonoBehaviour
@@ -41,7 +38,7 @@ public class TurnBasedEntity : MonoBehaviour
     public virtual void Die()
     {
         TurnManager.instance.RemoveEntityFromEntityList(gameObject);
-        GameManager.instance.AddScore(100);
+        Destroy(gameObject);
     }
 
     public virtual void Attack(GameObject potentialTarget)
