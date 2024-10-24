@@ -33,7 +33,6 @@ public class TurnManager : MonoBehaviour
         {
             AddEntityToEntityList(entity.gameObject);
             entity.hasTurn = false;
-            Debug.Log(entity.hasTurn);
         }
 
         SortListByInitiative();
@@ -60,8 +59,8 @@ public class TurnManager : MonoBehaviour
 
     public void ClearEntityList()
     {
-        Debug.Log("Clearing entity list");
         gameEntities.Clear();
+        nextEntityTurnIndex = 0;
     }
 
     public void CallStartNextEntityTurn()
@@ -72,32 +71,20 @@ public class TurnManager : MonoBehaviour
             turnCount += 1;
             turnNum.text = turnCount.ToString();
         }
+
         gameEntities[nextEntityTurnIndex].GetComponent<TurnBasedEntity>().StartTurn();
         currentEntity.text = gameEntities[nextEntityTurnIndex].name + " is moving...";
         nextEntityTurnIndex += 1;
-        
     }
 
     public void SortListByInitiative()
     {
-        Debug.Log(gameEntities.Count);
-
         if(gameEntities.Count <= 1)
         {
             return;
         }
         gameEntities.Sort((x, y) => x.GetComponent<TurnBasedEntity>().initiative.CompareTo(y.GetComponent<TurnBasedEntity>().initiative));
         gameEntities.Reverse();
-
-        if(gameEntities[0].gameObject != gameEntities[0].CompareTag("Player"))
-        {
-            foreach (GameObject entity in gameEntities)
-            {
-                Debug.Log(entity.name);
-            }
-            Debug.Log("Player is not first in the list!!!!!!!");
-            ClearEntityList();
-        }
     }
 
     

@@ -45,7 +45,6 @@ public class EnemyEntityScript : TurnBasedEntity
 
     public override void StartTurn()
     {
-        Debug.Log("Enemy Turn");
         base.StartTurn();
         automaticMovementScript.movementRemaining = maximumMovementDistance;
         automaticMovementScript.hasReachedTarget = true;

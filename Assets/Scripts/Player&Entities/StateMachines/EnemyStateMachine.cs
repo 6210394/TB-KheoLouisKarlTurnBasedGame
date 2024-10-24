@@ -26,7 +26,7 @@ public class EnemyStateMachine : MonoBehaviour
         }
         else
         {
-            currentState = STATE.SEARCHING;
+            return;
         }
     }
 
@@ -49,7 +49,7 @@ public class EnemyStateMachine : MonoBehaviour
 
     public virtual void Stop()
     {
-        
+
     }
 
     protected void RunStateMachine()

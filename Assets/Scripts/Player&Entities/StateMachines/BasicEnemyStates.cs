@@ -111,9 +111,11 @@ public class BasicEnemyStates : EnemyStateMachine
                 }
                 else
                 {
-                    enemyEntityScript.EndTurn();
-                    SwitchToNextState(STATE.SEARCHING);
-                    SwitchToNextEvent(EVENT.ENTER);
+                    if(enemyEntityScript.hasTurn)
+                    {
+                        Debug.Log("Enemy ends turn");
+                        enemyEntityScript.EndTurn();
+                    }
                 }
                 break;
             }    
@@ -141,6 +143,7 @@ public class BasicEnemyStates : EnemyStateMachine
             {
                 if(enemyEntityScript.hasTurn)
                 {
+                    Debug.Log("Enemy ends turn");
                     enemyEntityScript.EndTurn();
                 }
                 break;
