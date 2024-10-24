@@ -63,11 +63,24 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         Init();
-        SceneManager.sceneLoaded += (scene, mode) => OnSceneLoaded(scene, mode);
+        SceneManager.sceneLoaded +=  OnSceneLoaded;
     }
 
     void Init()
     {
+        Debug.Log("Initializing GameManager");
+        sceneToLoad = SceneManager.GetActiveScene().name;
+
+        if(SceneManager.GetActiveScene().name == "MainMenu" || SceneManager.GetActiveScene().name == "GameOver")
+        {
+            GetComponentInChildren<Canvas>().enabled = false;
+            return;
+        }
+        else
+        {
+            GetComponentInChildren<Canvas>().enabled = true;
+        }
+
         SpawnPlayer();
         
         //this would be relevant in the case I had a camera for each enemy and it would swtich between them on their turn
@@ -117,8 +130,13 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(sceneName);
     }
 
+    public void ManagerLoadScene()
+    {
+        SceneManager.LoadScene(sceneToLoad);
+    }
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+        Debug.Log(scene.name + mode);
         Init();
     }
 
@@ -132,8 +150,9 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            SpawnPlayer();
+            ManagerLoadScene();
         }
+
     }
 
     public void GameOver()

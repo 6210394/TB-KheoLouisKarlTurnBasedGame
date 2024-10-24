@@ -32,6 +32,8 @@ public class TurnManager : MonoBehaviour
         foreach (TurnBasedEntity entity in FindObjectsOfType<TurnBasedEntity>())
         {
             AddEntityToEntityList(entity.gameObject);
+            entity.hasTurn = false;
+            Debug.Log(entity.hasTurn);
         }
 
         SortListByInitiative();
@@ -58,6 +60,7 @@ public class TurnManager : MonoBehaviour
 
     public void ClearEntityList()
     {
+        Debug.Log("Clearing entity list");
         gameEntities.Clear();
     }
 
@@ -86,10 +89,14 @@ public class TurnManager : MonoBehaviour
         gameEntities.Sort((x, y) => x.GetComponent<TurnBasedEntity>().initiative.CompareTo(y.GetComponent<TurnBasedEntity>().initiative));
         gameEntities.Reverse();
 
-        // Debugging purposes
-        foreach (GameObject entity in gameEntities)
+        if(gameEntities[0].gameObject != gameEntities[0].CompareTag("Player"))
         {
-            Debug.Log(entity.name + " has an initiative of " + entity.GetComponent<TurnBasedEntity>().initiative);
+            foreach (GameObject entity in gameEntities)
+            {
+                Debug.Log(entity.name);
+            }
+            Debug.Log("Player is not first in the list!!!!!!!");
+            ClearEntityList();
         }
     }
 

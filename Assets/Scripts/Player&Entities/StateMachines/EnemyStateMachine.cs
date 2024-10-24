@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class EnemyStateMachine : MonoBehaviour
 {
-    public enum STATE { SEARCHING, CHASING, ATTACKING }
+    public enum STATE { SEARCHING, CHASING, ATTACKING, STOP }
     public enum EVENT { ENTER, UPDATE, EXIT }
     
     public STATE currentState;
@@ -24,6 +24,10 @@ public class EnemyStateMachine : MonoBehaviour
         {
             RunStateMachine();
         }
+        else
+        {
+            currentState = STATE.SEARCHING;
+        }
     }
 
     public virtual void Init()
@@ -33,35 +37,41 @@ public class EnemyStateMachine : MonoBehaviour
 
     public virtual void Searching()
     {
-        Debug.Log("Searching");
     }
 
     public virtual void Chasing()
     {
-        Debug.Log("Approaching");
     }
 
     public virtual void Attacking()
     {
-        Debug.Log("Attacking");
+    }
+
+    public virtual void Stop()
+    {
+        
     }
 
     protected void RunStateMachine()
     {
-        switch (currentState)
-        {
-            case STATE.SEARCHING:
-                Searching();
-                break;
+            switch (currentState)
+            {
+                case STATE.STOP:
+                    Stop();
+                    break;    
 
-            case STATE.CHASING:
-                Chasing();
-                break;
+                case STATE.SEARCHING:
+                    Searching();
+                    break;
 
-            case STATE.ATTACKING:
-                Attacking();
-                break;
-        }
+                case STATE.CHASING:
+                    Chasing();
+                    break;
+
+                case STATE.ATTACKING:
+                    Attacking();
+                    break;
+            }
     }
 
     protected void SwitchToNextState(STATE nextState)
@@ -83,12 +93,10 @@ public class EnemyStateMachine : MonoBehaviour
                 {
                     if (hit.collider.gameObject.tag != "Player")
                     {
-                        Debug.Log("Raycast hit something other than the player: " + hit.collider.gameObject.name);
                         return false;
                     }
                     else
                     {
-                        Debug.Log("Raycast hit the player.");
                         return true;
                     }
                 }

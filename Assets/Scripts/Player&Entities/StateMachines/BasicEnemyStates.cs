@@ -56,7 +56,6 @@ public class BasicEnemyStates : EnemyStateMachine
                 }
                 else
                 {   
-                    Debug.Log("Moving Randomly");
                     automaticMovementScript.MoveRandomly();
                     if(automaticMovementScript.movementRemaining <= 0)
                     {
@@ -133,7 +132,6 @@ public class BasicEnemyStates : EnemyStateMachine
 
             case EVENT.UPDATE:
             {
-                Debug.Log("Attacking");
                 enemyEntityScript.Attack(target);
                 currentEvent = EVENT.EXIT;
                 break;
@@ -141,14 +139,16 @@ public class BasicEnemyStates : EnemyStateMachine
 
             case EVENT.EXIT:
             {
-                SwitchToNextEvent(EVENT.ENTER);
-                SwitchToNextState(STATE.SEARCHING);
-                enemyEntityScript.EndTurn();
+                if(enemyEntityScript.hasTurn)
+                {
+                    enemyEntityScript.EndTurn();
+                }
                 break;
             }
                 
         }
     }
+
 
     void OnDrawGizmos()
     {

@@ -5,6 +5,7 @@ public class EnemyEntityScript : TurnBasedEntity
 {
     public EnemyStats enemyStats;
     public AutomaticMovementScript automaticMovementScript;
+    public EnemyStateMachine enemyStateMachine;
 
     public Animator animator;
 
@@ -37,6 +38,7 @@ public class EnemyEntityScript : TurnBasedEntity
     {
         automaticMovementScript = GetComponent<AutomaticMovementScript>();
         animator = GetComponentInChildren<Animator>();
+        enemyStateMachine = GetComponent<EnemyStateMachine>();
         AquireStats();
         base.Init();
     }
@@ -48,6 +50,8 @@ public class EnemyEntityScript : TurnBasedEntity
         automaticMovementScript.movementRemaining = maximumMovementDistance;
         automaticMovementScript.hasReachedTarget = true;
         automaticMovementScript.navMeshAgent.isStopped = false;
+        enemyStateMachine.currentState = EnemyStateMachine.STATE.SEARCHING;
+        enemyStateMachine.currentEvent = EnemyStateMachine.EVENT.ENTER;
         // Do enemy AI stuff here
     }
 
@@ -69,6 +73,7 @@ public class EnemyEntityScript : TurnBasedEntity
         {
             animator.SetTrigger("AttackTrigger");
             StartCoroutine(DealDamageAfterDelay(potentialTarget, animator.GetCurrentAnimatorStateInfo(0).length));
+            
         }
     }
 

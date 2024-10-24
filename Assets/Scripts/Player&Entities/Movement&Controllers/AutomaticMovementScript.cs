@@ -58,7 +58,6 @@ public class AutomaticMovementScript : MonoBehaviour
 
     public void Init()
     {
-        Debug.Log("Init");
         hasReachedTarget = true;
         if(GetComponent<NavMeshAgent>() != null)
         {
@@ -71,7 +70,6 @@ public class AutomaticMovementScript : MonoBehaviour
     {
         if(hasReachedTarget)
         {
-            Debug.Log("Finding New Target");
             //Multiplied by 0.5 for flavor
             Vector3 randomDirection = new Vector3(Random.Range(-1 * movementRemaining, movementRemaining * 0.5f), 0, Random.Range(-1 * movementRemaining, movementRemaining * 0.5f ));
             randomDirection += transform.position;

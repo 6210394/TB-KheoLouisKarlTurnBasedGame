@@ -478,10 +478,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8605684707718181210, guid: 7a7c82a1e3ccf204a9b9ed0eb352bef6, type: 3}
-      propertyPath: gameManagerObject
+    - target: {fileID: 2504855972411633960, guid: 7a7c82a1e3ccf204a9b9ed0eb352bef6, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 779880997087489910, guid: 00e31c9da1c24cd4b87c9fab2344a42a, type: 3}
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

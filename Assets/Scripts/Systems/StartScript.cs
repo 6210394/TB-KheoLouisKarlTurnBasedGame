@@ -14,6 +14,8 @@ public class StartScript : MonoBehaviour
 
     public void LoadScene()
     {
+        Debug.Log("Loading Scene: " + sceneName);
+
         GameManager.instance.ManagerLoadScene(sceneName);
         if(sceneName == "Level1")
         {
@@ -30,8 +32,7 @@ public class StartScript : MonoBehaviour
     {
         if (GameManager.instance == null)
         {
-            GameObject gameManagerObject = new GameObject("GameManager");
-            gameManagerObject.AddComponent<GameManager>();
+            Instantiate(gameManagerObject);
         }
     }
 }

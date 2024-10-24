@@ -156,6 +156,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneName: Level1
+  gameManagerObject: {fileID: 779880997087489910, guid: 00e31c9da1c24cd4b87c9fab2344a42a, type: 3}
 --- !u!222 &1936111788205222518
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -361,6 +362,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneName: Level1
+  gameManagerObject: {fileID: 779880997087489910, guid: 00e31c9da1c24cd4b87c9fab2344a42a, type: 3}
 --- !u!222 &8421462740898343674
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -523,7 +525,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4218833211296013211}
-  - component: {fileID: 1638406625757732362}
   - component: {fileID: 7298232923850289308}
   - component: {fileID: 4806810978365464716}
   - component: {fileID: 2504855972411633960}
@@ -553,19 +554,6 @@ RectTransform:
   m_AnchoredPosition: {x: 260, y: -242}
   m_SizeDelta: {x: 965.0093, y: 294.9539}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1638406625757732362
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7993507120845327942}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 443dc48417fbdad43bf8c4ab7d12a54e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sceneName: Level1
 --- !u!222 &7298232923850289308
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -707,7 +695,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1638406625757732362}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: StartScript, Assembly-CSharp
         m_MethodName: QuitGame
         m_Mode: 1
